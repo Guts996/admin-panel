@@ -1,0 +1,116 @@
+.newUserWrapper {
+  height: 95%;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  direction: rtl;
+}
+.newUserWrapper .container {
+  width: 60%;
+  height: 85%;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 20px;
+  background: rgba(26, 93, 104, 0.2);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  border-color: hsla(0, 0%, 100%, 0.2) hsla(0, 0%, 100%, 0.5)
+    hsla(0, 0%, 100%, 0.5) hsla(0, 0%, 100%, 0.2);
+  border-style: solid;
+  border-width: 1px;
+}
+.newUserInput {
+  width: 90%;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  direction: rtl;
+}
+.newUserInput label {
+  width: 40%;
+  color: #e6e6e6e7;
+}
+.newUserInput input,
+button,
+select {
+  width: 50%;
+  color: #e6e6e6e7;
+  background: hsla(0, 0%, 100%, 0.05);
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid hsla(0, 0%, 100%, 0.5);
+  border-top-color: rgba(255, 255, 255, 0.5);
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-right-color: rgba(255, 255, 255, 0.5);
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-left-color: rgba(255, 255, 255, 0.5);
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right: none;
+  border-bottom: none;
+  border-color: hsla(0, 0%, 100%, 0.2) hsla(0, 0%, 100%, 0.5)
+    hsla(0, 0%, 100%, 0.5) hsla(0, 0%, 100%, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.newUserInput button:hover {
+  background: hsla(0, 0%, 100%, 0.2);
+}
+.newUserInput select {
+  width: 57%;
+}
+@media only screen and (max-width: 900px) {
+  .editUserWrapper {
+    height: 90%;
+    width: 95%;
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    direction: rtl;
+    gap: 30px;
+  }
+  .editUserWrapper .container {
+    width: 95%;
+    height: fit-content;
+    padding: 5px 2px;
+  }
+  .userInfoDisplay {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 95%;
+    padding: 5px;
+  }
+  .userInfoDisplay p {
+    width: 30%;
+    color: #e6e6e6e7;
+  }
+  .newUserInput {
+    width: 95%;
+    padding: 5px;
+  }
+  .newUserInput label {
+    width: 35%;
+    color: #e6e6e6e7;
+  }
+  .newUserInput input,
+  button {
+    width: 60%;
+  }
+}
