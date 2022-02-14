@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ToolsBar from "../toolsBar/toolsBar";
 import "./usersList.css";
+import { db } from "../firebase/firebase";
+import { collection, getDocs } from "firebase/firestore";
+
 
 export default function UsersList(props) {
   const usersList = props.users;
+  const [users, setUsers] = useState([]);
+  const usersCollectionRef = collection(db, "Users");
   const [checkboxes, setCheckBoxes] = useState(
     document.getElementsByName("checkbox")
   );
@@ -23,10 +28,18 @@ export default function UsersList(props) {
       }
     });
   }
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getUsers();
+  }, []);
   return (
     <div>
       <div className="mainContainer">
-        <h1 className="containerTitle">قائمة المستخدمين {checkedItem}</h1>
+        <h1 className="containerTitle">قائمة المستخدمين</h1>
         <div className="usersListWrapper">
           <div className="InfosDisplayHeader">
             <input type="checkbox" name="" id="" value="" disabled />
@@ -36,7 +49,7 @@ export default function UsersList(props) {
             <p>الوظيفة</p>
             <p>إسم المستخدم</p>
           </div>
-          {usersList.map((user) => (
+          {users.map((user) => (
             <div className="userInfosWrapper">
               <input
                 type="checkbox"
@@ -47,7 +60,7 @@ export default function UsersList(props) {
                   checkOnlyThis(e);
                 }}
               />
-              <p>{user.fullName}</p>
+              <p>{user.name}</p>
               <p>{user.email}</p>
               <p>{user.phone}</p>
               <p>{user.type}</p>
@@ -56,7 +69,7 @@ export default function UsersList(props) {
           ))}
         </div>
       </div>
-      <ToolsBar editComp={"editUser"} addComp={"addUser"} item={checkedItem}/>
+      <ToolsBar editComp={"editUser"} addComp={"addUser"} item={checkedItem} sourcePage={"user"}/>
     </div>
   );
 }

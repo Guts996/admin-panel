@@ -6,14 +6,22 @@ import { BiTrip, BiHome } from "react-icons/bi";
 import { GiBusStop } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.png";
-export default class navbar extends React.Component {
-  render() {
+import { UseUserAuth } from "../authContext/userAuthContext";
+export default function navbar () {
+  const { logOut, user } = UseUserAuth();
+  const handleLogout = async (e) =>{
+    try {
+      await logOut();
+    } catch (err) {
+      console.log(""+err.message)
+    }
+  }
     return (
-      <div className="navbarArea">
+      user !=null?<div className="navbarArea">
         <div className="navbarWrapper">
           <div className="profile">
             <div className="navbarLinkWrapper">
-              <div className="tooltip">{this.props.user.email}</div>
+              <div className="tooltip">{user.email}</div>
               <span>
                 <i class="icon">
                   <FiUser />
@@ -24,7 +32,7 @@ export default class navbar extends React.Component {
               <div className="tooltip">تسجيل الخروج</div>
               <span>
                 <i class="icon">
-                  <FiLogOut />
+                  <FiLogOut onClick={handleLogout}/>
                 </i>
               </span>
             </div>
@@ -85,7 +93,7 @@ export default class navbar extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </div>:null
     );
-  }
+  
 }

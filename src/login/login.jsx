@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UseUserAuth } from "../../context/userAuthContext";
-import "./login.css"; 
+import { UseUserAuth } from "../authContext/userAuthContext";
+import "./login.css";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -9,6 +9,7 @@ export default function Login() {
   const { signIn } = UseUserAuth();
   const navigate = useNavigate();
   const handleLogin = async (e) => {
+    console.log(email)
     e.preventDefault();
     setError("");
     try {
@@ -18,12 +19,22 @@ export default function Login() {
       setError(error.message);
     }
   };
+  useEffect(()=> {
+    let inputs = document.getElementsByClassName('loginInput');
+    for(let item of inputs){
+      let placeholder = item.placeholder;
+      item.value = "";
+      item.placeholder =placeholder;
+    }
+  }, [])
 
   return (
     <div className="login">
       <div className="container">
         <div className="login-wrapper">
-          <div className="login-picture">
+          <div className="logo-wrapper">
+            <div className="login-picture"></div>
+            <span>dashboard</span>
           </div>
           <div className="login-form">
             <h1 className="title">تسجيل الدخول</h1>
@@ -33,9 +44,9 @@ export default function Login() {
                 type="email"
                 required
                 name="email"
-                id="email"
+                className="loginInput"
                 placeholder="البريد الإلكتروني"
-                onChange={(event)=>{
+                onChange={(event) => {
                   setEmail(event.target.value);
                 }}
               />
@@ -46,16 +57,18 @@ export default function Login() {
                 type="password"
                 required
                 name="password"
-                id="password"
+                className="loginInput"
                 placeholder="************"
-                onChange={(event)=>{
+                onChange={(event) => {
                   setPassword(event.target.value);
                 }}
               />
             </div>
             <h3 className="error-messages">{error}</h3>
             <div className="login-input">
-            <button className="loginButton" onClick={handleLogin}>سجل دخولك</button>
+              <button className="loginButton" onClick={handleLogin}>
+                سجل دخولك
+              </button>
             </div>
           </div>
         </div>
@@ -63,4 +76,3 @@ export default function Login() {
     </div>
   );
 }
-

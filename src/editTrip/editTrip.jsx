@@ -37,7 +37,7 @@ export default function EditTrip() {
   return (
     <div className="mainContainer">
       <h1 className="containerTitle">تعديل الرحلة</h1>
-      <div className="edittripWrapper">
+      <div className="editTripWrapper">
         <div className="container">
           <div className="tripInfoDisplay">
             <p>الإنطلاق</p>

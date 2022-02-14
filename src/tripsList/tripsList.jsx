@@ -62,7 +62,7 @@ export default function TripsList(props) {
           ))}
         </div>
       </div>
-      <ToolsBar editComp={"editTrip"} addComp={"addTrip"} item={checkedItem} />
+      <ToolsBar editComp={"editTrip"} addComp={"addTrip"} item={checkedItem} sourcePage={"trip"}/>
     </div>
   );
 }

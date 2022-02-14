@@ -8,6 +8,9 @@ import EditTrip from "./editTrip/editTrip";
 import EditUser from "./editUser/editUser";
 import NewUser from "./newUser/newUser";
 import Home from "./home/home";
+import ProtectedRoute from "./protectedRoute/protectedRoute";
+import { UserAuthContextProvider } from "./authContext/userAuthContext";
+import Login from "./login/login";
 
 function App() {
   const trips = [
@@ -41,7 +44,7 @@ function App() {
       arrival: "arrival",
       time: "time",
       days: "days",
-      station: "station",
+      station: "station",           
       verified: "verified",
     },
   ];
@@ -71,27 +74,27 @@ function App() {
       type: "admin",
     },
   ];
-  const user = {
-    id: "01",
-    fullName: "bachir moundher",
-    email: "moundher@gmail.com",
-    phone: "0672481618",
-    username: "gutsu996",
-    type: "admin",
-  };
   return (
     <div className="App">
       <Router>
-        <Navbar user={user} />
+        <UserAuthContextProvider>
+        <Navbar />
         <Routes>
-          <Route exact path="/users" element={<UsersList users={users} />} />
-          <Route exact path="/editUser/:id" element={<EditUser />} />
-          <Route exact path="/addUser" element={<NewUser />} />
-          <Route exact path="/trips" element={<TripsList trips = {trips} />} />
-          <Route exact path="/addTrip" element={<NewTrip />} />
-          <Route exact path="/editTrip/:id" element={<EditTrip />} />
-          <Route exact path="/" element={<Home />} />
-        </Routes>
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/" element={<ProtectedRoute>
+                  <Home />
+                </ProtectedRoute> } />
+          <Route exact path="/users" element={<ProtectedRoute><UsersList users = {users} /></ProtectedRoute>} />
+          <Route exact path="/editUser/:id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
+          <Route exact path="/addUser" element={<ProtectedRoute><NewUser /></ProtectedRoute>}/>
+          <Route exact path="/trips" element={<ProtectedRoute><TripsList trips = {trips} /></ProtectedRoute>} />
+          <Route exact path="/addTrip" element={<ProtectedRoute></ProtectedRoute>} />
+          <Route exact path="/editTrip/:id" element={<ProtectedRoute><EditTrip /></ProtectedRoute>} />
+     
+
+         </Routes>
+        </UserAuthContextProvider>
+     
       </Router>
     </div>
   );
